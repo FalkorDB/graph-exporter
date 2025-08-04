@@ -1,6 +1,8 @@
 [![license](https://img.shields.io/github/license/falkordb/graph-exporter.svg)](https://github.com/falkordb/graph-exporter)
 [![Release](https://img.shields.io/github/release/falkordb/graph-exporter.svg)](https://github.com/falkordb/graph-exporter/releases/latest)
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![CI](https://github.com/FalkorDB/graph-exporter/workflows/CI/badge.svg)](https://github.com/FalkorDB/graph-exporter/actions)
+[![codecov](https://codecov.io/gh/FalkorDB/graph-exporter/branch/main/graph/badge.svg)](https://codecov.io/gh/FalkorDB/graph-exporter)
 [![Forum](https://img.shields.io/badge/Forum-falkordb-blue)](https://github.com/orgs/FalkorDB/discussions)
 [![Discord](https://img.shields.io/discord/1146782921294884966?style=flat-square)](https://discord.gg/ErBEqN9E)
 
@@ -150,6 +152,40 @@ pipenv install --dev
 # Add new dependencies
 pipenv install <package_name>
 ```
+
+### Testing
+
+The project includes comprehensive tests that verify the export functionality with real FalkorDB instances.
+
+#### Running Tests Locally
+
+1. Start a FalkorDB instance:
+   ```bash
+   docker run --rm -p 6379:6379 falkordb/falkordb:latest
+   ```
+
+2. Install test dependencies:
+   ```bash
+   pipenv install --dev
+   ```
+
+3. Run the tests:
+   ```bash
+   pytest test_main.py -v
+   ```
+
+4. Run tests with coverage:
+   ```bash
+   pytest --cov=main --cov-report=term-missing test_main.py
+   ```
+
+#### CI/CD
+
+The project uses GitHub Actions for continuous integration:
+- Tests are run against multiple Python versions (3.8-3.12)
+- FalkorDB is started as a service container
+- Coverage reports are uploaded to Codecov
+- All tests must pass before merging PRs
 
 ### Dependencies
 
