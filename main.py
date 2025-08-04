@@ -42,7 +42,8 @@ def export_graph(graph_name, host, port):
     pd.DataFrame(edges).to_csv("edges.csv", index=False)
     print("✅ Exported edges to edges.csv")
 
-if __name__ == "__main__":
+def main():
+    """Main entry point for the CLI."""
     parser = argparse.ArgumentParser(description="Export FalkorDB graph nodes and edges to CSV.")
     parser.add_argument("graph_name", help="Name of the graph to export")
     parser.add_argument("--host", default="localhost", help="FalkorDB host (default: localhost)")
@@ -51,4 +52,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     export_graph(args.graph_name, args.host, args.port)
+
+
+if __name__ == "__main__":
+    main()
 
