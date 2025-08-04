@@ -24,7 +24,7 @@ setup(
     license="MIT",
     py_modules=["main"],
     install_requires=install_requires,
-    python_requires=">=3.8",
+    python_requires=">=3.13",
     entry_points={
         "console_scripts": [
             "falkordb-graph-exporter=main:main",
