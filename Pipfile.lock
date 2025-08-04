@@ -5,7 +5,7 @@
         },
         "pipfile-spec": 6,
         "requires": {
-            "python_version": "3.13"
+            "python_version": "3.12"
         },
         "sources": [
             {
@@ -229,6 +229,24 @@
             "index": "pypi",
             "markers": "python_version >= \"3.8\"",
             "version": "==6.2.1"
+        },
+        "build": {
+            "hashes": [
+                "sha256:1a07724e891cbd898923145eb7752ee7653674c511378233d63b1c90d9de7acc",
+                "sha256:8d74edbe15c0ad42dd8fea5a1b20d15e7045fa9a0b41e63cba7128e48f4a1d52"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.8'",
+            "version": "==1.3.0"
+        },
+        "twine": {
+            "hashes": [
+                "sha256:4d65c5c2c8c1f4df2bf831c55537dc6d481f53618e5dd4962a8a80bbe9a13e9d",
+                "sha256:a2b1c4d9a6af2c72b1d68e0c0b1c88ceb7b92be93f75e21e7c62b2c13b2c21bb"
+            ],
+            "index": "pypi", 
+            "markers": "python_version >= '3.8'",
+            "version": "==6.2.0"
         }
     }
 }
