@@ -47,23 +47,6 @@ pipenv install
 pipenv shell
 ```
 
-### Method 2: Using pip
-
-```bash
-# Clone the repository
-git clone https://github.com/FalkorDB/graph-exporter.git
-cd graph-exporter
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Or install manually
-pip install falkordb pandas
-
-# Run directly
-python main.py --help
-```
-
 ## Usage
 
 ### Basic Usage
@@ -152,9 +135,6 @@ Use [FalkorDB Cloud](https://app.falkordb.cloud) for a managed FalkorDB instance
    # Using pipenv
    pipenv shell
    python main.py my_graph
-   
-   # Or using pip
-   python main.py my_graph
    ```
 
 4. Find your exported data in `nodes.csv` and `edges.csv`
@@ -169,9 +149,6 @@ pipenv install --dev
 
 # Add new dependencies
 pipenv install <package_name>
-
-# Generate requirements.txt if needed
-pipenv requirements > requirements.txt
 ```
 
 ### Dependencies
