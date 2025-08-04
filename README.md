@@ -153,18 +153,6 @@ pipenv install --dev
 pipenv install <package_name>
 ```
 
-## Development
-
-### Using pipenv for Development
-
-```bash
-# Install development dependencies (if any)
-pipenv install --dev
-
-# Add new dependencies
-pipenv install <package_name>
-```
-
 ### Testing
 
 The project includes comprehensive tests that verify the export functionality with real FalkorDB instances.
@@ -178,7 +166,7 @@ The project includes comprehensive tests that verify the export functionality wi
 
 2. Install test dependencies:
    ```bash
-   pip install pytest pytest-cov coverage
+   pipenv install --dev
    ```
 
 3. Run the tests:

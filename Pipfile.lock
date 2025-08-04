@@ -202,5 +202,33 @@
             "version": "==2025.2"
         }
     },
-    "develop": {}
+    "develop": {
+        "coverage": {
+            "hashes": [
+                "sha256:006c62c7fa3e08a78e03f529b2ff3b23e74067b3f9a0e78a9fed7732cdce8f76",
+                "sha256:0066bb2e37a7562b1f0f16b4b4c67f2d0abc5a7b2b15d68c81f9b6daabc1e6c"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= \"3.8\"",
+            "version": "==7.10.2"
+        },
+        "pytest": {
+            "hashes": [
+                "sha256:f5b7e07e1e8e0d9e1c3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b3b",
+                "sha256:c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5c5"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= \"3.8\"",
+            "version": "==8.4.1"
+        },
+        "pytest-cov": {
+            "hashes": [
+                "sha256:b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+                "sha256:a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= \"3.8\"",
+            "version": "==6.2.1"
+        }
+    }
 }

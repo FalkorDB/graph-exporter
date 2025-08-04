@@ -8,9 +8,9 @@ falkordb = "*"
 pandas = "*"
 
 [dev-packages]
-pytest = "*"
-pytest-cov = "*"
-coverage = "*"
+pytest = "==8.4.1"
+pytest-cov = "==6.2.1"
+coverage = "==7.10.2"
 
 [requires]
 python_version = "3.12"
