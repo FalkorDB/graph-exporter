@@ -18,3 +18,5 @@ localhost
 hostname
 metadata
 CLI
+Codecov
+PRs
