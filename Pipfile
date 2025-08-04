@@ -4,8 +4,8 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-falkordb = "*"
-pandas = "*"
+falkordb = "==1.2.0"
+pandas = "==2.3.1"
 
 [dev-packages]
 build = "*"
