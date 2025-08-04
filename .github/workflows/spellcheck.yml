@@ -1,5 +1,5 @@
 name: Spellcheck
-on:
+"on":
   push:
     branches: [main]
   pull_request:
