@@ -243,3 +243,80 @@ class TestGraphExporter:
         with pytest.raises(Exception):
             # Try to connect to non-existent server
             export_graph("test_graph", "nonexistent_host", 9999)
+    
+    def test_export_with_auth_params(self, test_graph, temp_dir):
+        """Test that export_graph accepts username and password parameters."""
+        # Test that function accepts auth parameters (even if server doesn't require them)
+        export_graph(test_graph, "localhost", 6379, username=None, password=None)
+        
+        # Should create the expected files
+        assert os.path.exists("nodes_Person.csv"), "nodes_Person.csv should be created"
+        assert os.path.exists("edges_WORKS_FOR.csv"), "edges_WORKS_FOR.csv should be created"
+    
+    def test_export_combined_mode(self, test_graph, temp_dir):
+        """Test export with split_by_type=False creates combined files."""
+        export_graph(test_graph, "localhost", 6379, split_by_type=False)
+        
+        # Check that combined CSV files were created
+        assert os.path.exists("nodes.csv"), "nodes.csv file should be created in combined mode"
+        assert os.path.exists("edges.csv"), "edges.csv file should be created in combined mode"
+        
+        # Verify nodes.csv has label column
+        nodes_df = pd.read_csv("nodes.csv")
+        assert "label" in nodes_df.columns, "nodes.csv should have label column"
+        assert len(nodes_df) >= 3, "Should have at least 3 nodes (2 Person + 1 Company)"
+        
+        # Verify edges.csv has type column
+        edges_df = pd.read_csv("edges.csv")
+        assert "type" in edges_df.columns, "edges.csv should have type column"
+        assert len(edges_df) >= 2, "Should have at least 2 edges (WORKS_FOR + KNOWS)"
+    
+    def test_export_split_mode_default(self, test_graph, temp_dir):
+        """Test that split_by_type=True is the default behavior."""
+        # Call without split_by_type parameter (should default to True)
+        export_graph(test_graph, "localhost", 6379)
+        
+        # Should create separate files per label/type (default behavior)
+        assert os.path.exists("nodes_Person.csv"), "Should create nodes_Person.csv by default"
+        assert os.path.exists("nodes_Company.csv"), "Should create nodes_Company.csv by default"
+        assert os.path.exists("edges_WORKS_FOR.csv"), "Should create edges_WORKS_FOR.csv by default"
+        
+        # Should NOT create combined files
+        assert not os.path.exists("nodes.csv"), "Should not create nodes.csv in split mode"
+        assert not os.path.exists("edges.csv"), "Should not create edges.csv in split mode"
+    
+    def test_export_pagination_large_graph(self, falkordb_connection, temp_dir):
+        """Test that pagination works with larger datasets."""
+        # Create a graph with more nodes than would fit in a single batch
+        large_graph_name = "large_test_graph"
+        g = falkordb_connection.select_graph(large_graph_name)
+        
+        # Clear any existing data
+        try:
+            g.query("MATCH (n) DETACH DELETE n")
+        except:
+            pass
+        
+        # Create 100 nodes (simulating pagination, though batch size is 10000)
+        g.query("UNWIND range(1, 100) AS i CREATE (:TestNode {id: i, name: 'Node' + toString(i)})")
+        
+        # Create some edges
+        g.query("MATCH (a:TestNode), (b:TestNode) WHERE a.id < b.id AND b.id - a.id = 1 CREATE (a)-[:NEXT]->(b)")
+        
+        export_graph(large_graph_name, "localhost", 6379)
+        
+        # Verify all nodes were exported
+        assert os.path.exists("nodes_TestNode.csv"), "nodes_TestNode.csv should be created"
+        nodes_df = pd.read_csv("nodes_TestNode.csv")
+        assert len(nodes_df) == 100, f"Should have 100 nodes, got {len(nodes_df)}"
+        
+        # Verify edges were exported
+        assert os.path.exists("edges_NEXT.csv"), "edges_NEXT.csv should be created"
+        edges_df = pd.read_csv("edges_NEXT.csv")
+        assert len(edges_df) == 99, f"Should have 99 edges, got {len(edges_df)}"
+        
+        # Cleanup
+        try:
+            g.query("MATCH (n) DETACH DELETE n")
+        except:
+            pass
