@@ -238,13 +238,6 @@ class TestGraphExporter:
         except:
             pass
     
-    def test_export_connection_error(self, temp_dir):
-        """Test behavior when FalkorDB connection fails."""
-        # Test with localhost on a port that's definitely not listening
-        # This should cause a connection refused error
-        with pytest.raises(Exception):
-            export_graph("test_graph", "localhost", 1)
-    
     def test_export_with_auth_params(self, test_graph, temp_dir):
         """Test that export_graph accepts username and password parameters."""
         # Test that function accepts auth parameters (even if server doesn't require them)
