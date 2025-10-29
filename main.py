@@ -19,15 +19,14 @@ def export_graph(graph_name, host, port, username=None, password=None, split_by_
 
     # Export Nodes by Label
     print("🔄 Fetching nodes...")
-    last_id = -1
+    skip = 0
     batch_size = 10000
     nodes_by_label = defaultdict(list)
     total_nodes = 0
 
     while True:
-        # Use ID-based pagination for better performance
         nodes_result = g.ro_query(
-            f"MATCH (n) WHERE ID(n) > {last_id} RETURN ID(n), labels(n), properties(n) ORDER BY ID(n) LIMIT {batch_size}"
+            f"MATCH (n) RETURN ID(n), labels(n), properties(n) SKIP {skip} LIMIT {batch_size}"
         )
         
         if not nodes_result.result_set:
@@ -49,15 +48,14 @@ def export_graph(graph_name, host, port, username=None, password=None, split_by_
                 node = {"id": node_id}
                 node.update(props)
                 nodes_by_label["unlabeled"].append(node)
-            
-            # Track last ID for next iteration
-            last_id = node_id
         
         total_nodes += len(nodes_result.result_set)
         print(f"  Fetched {total_nodes} nodes...")
         
         if len(nodes_result.result_set) < batch_size:
             break
+        
+        skip += batch_size
 
     # Export nodes
     if split_by_type:
@@ -79,15 +77,14 @@ def export_graph(graph_name, host, port, username=None, password=None, split_by_
 
     # Export Edges by Type
     print("\n🔄 Fetching edges...")
-    last_id = -1
+    skip = 0
     batch_size = 10000
     edges_by_type = defaultdict(list)
     total_edges = 0
 
     while True:
-        # Use ID-based pagination for better performance
         edges_result = g.ro_query(
-            f"MATCH (a)-[e]->(b) WHERE ID(e) > {last_id} RETURN ID(e), TYPE(e), ID(a), ID(b), properties(e) ORDER BY ID(e) LIMIT {batch_size}"
+            f"MATCH (a)-[e]->(b) RETURN ID(e), TYPE(e), ID(a), ID(b), properties(e) SKIP {skip} LIMIT {batch_size}"
         )
         
         if not edges_result.result_set:
@@ -107,15 +104,14 @@ def export_graph(graph_name, host, port, username=None, password=None, split_by_
             }
             edge.update(props)
             edges_by_type[edge_type].append(edge)
-            
-            # Track last ID for next iteration
-            last_id = edge_id
         
         total_edges += len(edges_result.result_set)
         print(f"  Fetched {total_edges} edges...")
         
         if len(edges_result.result_set) < batch_size:
             break
+        
+        skip += batch_size
 
     # Export edges
     if split_by_type:
