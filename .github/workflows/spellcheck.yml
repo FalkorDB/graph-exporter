@@ -10,9 +10,9 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - name: Spellcheck
-        uses: rojopolis/spellcheck-github-actions@0.51.0
+        uses: rojopolis/spellcheck-github-actions@35a02bae020e6999c5c37fabaf447f2eb8822ca7 # 0.51.0
         with:
           config_path: .github/spellcheck-settings.yml
           task_name: Markdown
