@@ -4,7 +4,7 @@
 [![CI](https://github.com/FalkorDB/graph-exporter/workflows/CI/badge.svg)](https://github.com/FalkorDB/graph-exporter/actions)
 [![codecov](https://codecov.io/gh/FalkorDB/graph-exporter/branch/main/graph/badge.svg)](https://codecov.io/gh/FalkorDB/graph-exporter)
 [![Forum](https://img.shields.io/badge/Forum-falkordb-blue)](https://github.com/orgs/FalkorDB/discussions)
-[![Discord](https://img.shields.io/discord/1146782921294884966?style=flat-square)](https://discord.gg/ErBEqN9E)
+[![Discord](https://img.shields.io/discord/1146782921294884966?style=flat-square)](https://discord.gg/6M4QwDXn2w)
 
 # FalkorDB Graph Exporter
 
@@ -209,4 +209,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - 📖 [Documentation](https://docs.falkordb.com)
 - 💬 [Community Forum](https://github.com/orgs/FalkorDB/discussions) 
 - 🐛 [Report Issues](https://github.com/FalkorDB/graph-exporter/issues)
-- 💬 [Discord Community](https://discord.gg/ErBEqN9E)
+- 💬 [Discord Community](https://discord.gg/6M4QwDXn2w)
