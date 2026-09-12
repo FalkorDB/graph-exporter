@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "dcc5fb941ad0b6ce5b755cbb033cf3edb3dc87382b4986ba073188916fbabaa9"
+            "sha256": "71272ee86b70b2de1571628afc916d5d55a2bb307d02dc7fdba16aff5094c41d"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -680,11 +680,11 @@
         },
         "iniconfig": {
             "hashes": [
-                "sha256:3abbd2e30b36733fee78f9c7f7308f2d0050e88f0087fd25c2645f63c773e1c7",
-                "sha256:9deba5723312380e77435581c6bf4935c94cbfab9b1ed33ef8d238ea168eb760"
+                "sha256:c76315c77db068650d49c5b56314774a7804df16fee4402c1f19d6d15d8c4730",
+                "sha256:f631c04d2c48c52b84d0d0549c99ff3859c98df65b3101406327ecc7d53fbf12"
             ],
-            "markers": "python_version >= '3.8'",
-            "version": "==2.1.0"
+            "markers": "python_version >= '3.10'",
+            "version": "==2.3.0"
         },
         "jaraco.classes": {
             "hashes": [
@@ -834,12 +834,12 @@
         },
         "pytest-cov": {
             "hashes": [
-                "sha256:25cc6cc0a5358204b8108ecedc51a9b57b34cc6b8c967cc2c01a4e00d8a67da2",
-                "sha256:f5bc4c23f42f1cdd23c70b1dab1bbaef4fc505ba950d53e0081d0730dd7e86d5"
+                "sha256:35c580e7800f87ce892e687461166e1ac2bcb8fb9e13aea79032518d6e503ff2",
+                "sha256:440db28156d2468cafc0415b4f8e50856a0d11faefa38f30906048fe490f1749"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.9'",
-            "version": "==6.2.1"
+            "version": "==6.3.0"
         },
         "readme-renderer": {
             "hashes": [
