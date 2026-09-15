@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-falkordb = "==1.2.0"
+falkordb = "==1.7.1"
 pandas = "==3.0.5"
 
 [dev-packages]
