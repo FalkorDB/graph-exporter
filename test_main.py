@@ -1,4 +1,5 @@
 import pytest
+import csv
 import os
 import pandas as pd
 from falkordb import FalkorDB
@@ -238,6 +239,37 @@ class TestGraphExporter:
         except:
             pass
     
+    @pytest.mark.parametrize(
+        "value",
+        [9007199254740993, -9007199254740993, 9223372036854775807, -9223372036854775808],
+    )
+    @pytest.mark.parametrize("other", [None, 1.5])
+    def test_export_preserves_integer_properties(
+        self, falkordb_connection, temp_dir, value, other
+    ):
+        """Preserve integers beside missing or floating-point properties in CSV."""
+        graph_name = "integer_properties_test_graph"
+        g = falkordb_connection.select_graph(graph_name)
+        try:
+            g.query(
+                "CREATE (a:Number {value: $value}), (b:Number {value: $other}), "
+                "({value: $value}), ({value: $other}), "
+                "(a)-[:NEXT {value: $value}]->(b), "
+                "(a)-[:NEXT {value: $other}]->(b)",
+                params={"value": value, "other": other},
+            )
+
+            export_graph(graph_name, "localhost", 6379)
+
+            expected = {str(value), "" if other is None else str(other)}
+            for filename in ("nodes_Number.csv", "nodes_unlabeled.csv", "edges_NEXT.csv"):
+                with open(filename, newline="") as csv_file:
+                    rows = list(csv.DictReader(csv_file))
+                assert len(rows) == 2
+                assert {row["value"] for row in rows} == expected
+        finally:
+            g.delete()
+
     def test_export_connection_error(self):
         """Test behavior when FalkorDB connection fails."""
         with pytest.raises(Exception):
