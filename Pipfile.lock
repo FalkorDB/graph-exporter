@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "b6cfe0314e11ce6bc58e234d23fbfa989799bc550f21948894a1e24c1d8cc9f7"
+            "sha256": "951b40d7b6d1bff97415bf86fa18233992144410ff0bf0ed84912eef9af884c6"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -18,12 +18,12 @@
     "default": {
         "falkordb": {
             "hashes": [
-                "sha256:09dd89dfb668c6fe7741c0ec67fcdb5c7a4b009e87f065a644199170f4fa5766",
-                "sha256:0e62d535edd5abf7b6d35e2493fba71118734313436ff803fcd5d1b20e9e2194"
+                "sha256:2ab3fd5e3880a3a2708efbcc536a9175f24a59bff328758a3819dca8994526be",
+                "sha256:ad9116f073de822bd1dd98f0dea41eadf93b75ef5f412e34abb60548211c30af"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.10'",
-            "version": "==1.7.1"
+            "version": "==1.8.1"
         },
         "numpy": {
             "hashes": [
