@@ -33,7 +33,7 @@ def export_graph(graph_name, host, port):
     # Export each node label to its own CSV file
     for label, nodes in nodes_by_label.items():
         filename = f"nodes_{label}.csv"
-        pd.DataFrame(nodes).to_csv(filename, index=False)
+        pd.DataFrame(nodes, dtype=object).to_csv(filename, index=False)
         print(f"✅ Exported {len(nodes)} nodes with label '{label}' to {filename}")
 
     # Export Edges by Type
@@ -60,7 +60,7 @@ def export_graph(graph_name, host, port):
     # Export each edge type to its own CSV file
     for edge_type, edges in edges_by_type.items():
         filename = f"edges_{edge_type}.csv"
-        pd.DataFrame(edges).to_csv(filename, index=False)
+        pd.DataFrame(edges, dtype=object).to_csv(filename, index=False)
         print(f"✅ Exported {len(edges)} edges of type '{edge_type}' to {filename}")
 
     # Print summary
