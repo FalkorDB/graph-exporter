@@ -164,11 +164,12 @@
         },
         "pyjwt": {
             "hashes": [
-                "sha256:3cc5772eb20009233caf06e9d8a0577824723b44e6648ee0a2aedb6cf9381953",
-                "sha256:dcdd193e30abefd5debf142f9adfcdd2b58004e644f25406ffaebd50bd98dacb"
+                "sha256:7a3742debf6b879e912dbb9819ceec1594be812452b78c5f2e2dfc56564954f8",
+                "sha256:b11c5f9791d7bf51c2b39a81ed669f6b2dbbd669df2942f6c60167e9e3d1abe4"
             ],
+            "index": "pypi",
             "markers": "python_version >= '3.9'",
-            "version": "==2.10.1"
+            "version": "==2.15.0"
         },
         "python-dateutil": {
             "hashes": [
