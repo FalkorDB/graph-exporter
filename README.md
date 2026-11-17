@@ -17,6 +17,9 @@ A command-line tool to export FalkorDB graph data to CSV files. This tool connec
 - Export graph nodes to CSV with properties and labels
 - Export graph edges/relationships to CSV with properties and types
 - Connect to local or remote FalkorDB instances
+- **Authentication support** with username and password
+- **Pagination** for large graphs (handles unlimited nodes/edges)
+- **Flexible output**: separate files per label/type or combined files
 - Simple command-line interface
 - Handles graph properties and metadata
 
@@ -70,48 +73,94 @@ python main.py <graph_name> --host <hostname> --port <port>
 ### Command Line Options
 
 ```
-usage: main.py [-h] [--host HOST] [--port PORT] graph_name
+usage: main.py [-h] [--host HOST] [--port PORT] [--username USERNAME] 
+               [--password PASSWORD] [--split-by-type] [--no-split-by-type] 
+               graph_name
 
-Export FalkorDB graph nodes and edges to CSV.
+Export FalkorDB graph nodes and edges to CSV files by label/type.
 
 positional arguments:
-  graph_name   Name of the graph to export
+  graph_name            Name of the graph to export
 
 options:
-  -h, --help   show this help message and exit
-  --host HOST  FalkorDB host (default: localhost)
-  --port PORT  FalkorDB port (default: 6379)
+  -h, --help            show this help message and exit
+  --host HOST           FalkorDB host (default: localhost)
+  --port PORT           FalkorDB port (default: 6379)
+  --username USERNAME   FalkorDB username (optional)
+  --password PASSWORD   FalkorDB password (optional)
+  --split-by-type       Create separate CSV files per node label and edge type (default)
+  --no-split-by-type    Create single CSV files for all nodes and edges
 ```
 
 ### Examples
 
-Export a graph named "social" from local FalkorDB:
+**Basic export** (separate files per label/type):
 ```bash
 python main.py social
 ```
 
-Export from a remote FalkorDB instance:
+**Export from remote instance:**
 ```bash
 python main.py social --host redis.example.com --port 6379
 ```
 
+**Export with authentication:**
+```bash
+python main.py social --username myuser --password mypass
+```
+
+**Export to combined files** (single nodes.csv and edges.csv):
+```bash
+python main.py social --no-split-by-type
+```
+
+**Full example with all options:**
+```bash
+python main.py social --host db.example.com --port 6379 \
+  --username admin --password secret --split-by-type
+```
+
 ## Output
 
-The tool generates two CSV files:
+The tool can generate CSV files in two modes:
 
-### nodes.csv
-Contains all nodes with the following columns:
+### Default Mode (--split-by-type)
+
+Creates **separate files for each node label and edge type**:
+
+#### Node files: `nodes_<label>.csv`
+Each node label gets its own file (e.g., `nodes_Person.csv`, `nodes_Company.csv`):
+- `id`: Node ID
+- Additional columns for each node property
+
+#### Edge files: `edges_<type>.csv`
+Each edge type gets its own file (e.g., `edges_WORKS_AT.csv`, `edges_KNOWS.csv`):
+- `id`: Edge ID
+- `from_id`: Source node ID
+- `to_id`: Target node ID
+- Additional columns for each edge property
+
+### Combined Mode (--no-split-by-type)
+
+Creates **two combined files**:
+
+#### nodes.csv
+All nodes in a single file:
 - `id`: Node ID
 - `label`: Node label/type
 - Additional columns for each node property
 
-### edges.csv  
-Contains all relationships with the following columns:
+#### edges.csv  
+All edges in a single file:
 - `id`: Edge ID
 - `type`: Relationship type
 - `from_id`: Source node ID
 - `to_id`: Target node ID
 - Additional columns for each edge property
+
+### Large Graph Support
+
+The exporter uses **pagination** to handle graphs of any size. It fetches data in batches of 10,000 records and displays progress during export.
 
 ## Running FalkorDB
 
